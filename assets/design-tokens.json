@@ -1,0 +1,25 @@
+{
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "aspect": "9:16"
+  },
+  "colors": {
+    "card": "#f8f5ee",
+    "tableHeader": "#435b5d",
+    "text": "#172b33",
+    "mutedText": "#66757a",
+    "accentYellow": "#f2cf4a",
+    "accentOrange": "#e8664c",
+    "rowHighlight": "#f3e1d9",
+    "subtitleOutline": "#252c2e",
+    "emphasisBar": "rgba(22, 29, 31, 0.88)"
+  },
+  "typography": {
+    "fontFamily": "Microsoft YaHei UI, PingFang SC, Noto Sans CJK SC, Arial, sans-serif",
+    "subtitleSize": 56,
+    "subtitleOutline": 4,
+    "headlineSize": 58,
+    "tableTextSize": 30
+  }
+}

@@ -1,0 +1,7 @@
+interface:
+  display_name: "港险讲解视频"
+  short_description: "港险产品口播视频包装与数据画面生成流程"
+  default_prompt: "Use $hk-insurance-explainer-video to package my Hong Kong insurance talking-head video from the voiceover video and full script."
+
+policy:
+  allow_implicit_invocation: true
