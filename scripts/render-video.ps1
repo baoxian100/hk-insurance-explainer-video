@@ -23,8 +23,8 @@ for ($i = 0; $i -lt $timeline.scenes.Count; $i++) {
   $scene = $timeline.scenes[$i]
   $inputIndex = $i + 1
   $next = if ($i -eq $timeline.scenes.Count - 1) { "[vout]" } else { "[v$($i + 1)]" }
-  $filters += "[$inputIndex:v]format=rgba[ov$i]"
-  $filters += "$current[ov$i]overlay=0:0:enable='between(t,$($scene.start),$($scene.end))'$next"
+  $filters += "[$($inputIndex):v]format=rgba[ov$i]"
+  $filters += "$current[ov$i]overlay=0:0:shortest=1:enable='between(t,$($scene.start),$($scene.end))'$next"
   $current = $next
 }
 
@@ -51,4 +51,7 @@ $args += @(
 )
 
 ffmpeg @args
+if ($LASTEXITCODE -ne 0) {
+  throw "ffmpeg failed with exit code $LASTEXITCODE"
+}
 Write-Host "Rendered video: $OutputVideo"

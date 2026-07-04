@@ -39,15 +39,19 @@ Keep the output flexible: choose the best visual form for the script instead of 
 5. Add subtitles:
    - Default subtitle style: white bold Chinese text, dark gray-green outline, light shadow, no solid black background.
    - Keep black or dark translucent bars only for data emphasis strips, not normal spoken subtitles.
-   - Use `scripts/generate-ass-subtitles.js` to create a rough ASS subtitle file from the script when no timed subtitles exist.
+   - For any delivered rough cut or final video, align subtitles to the real speaking rhythm. Do not rely on proportional script-length timing except as a temporary diagnostic preview.
+   - Prefer `scripts/generate-speech-aligned-subtitles.py`: use the video audio to get speech timestamps, preserve the user-provided script as subtitle text, and map the script back onto the speech timing. Cache ASR JSON in the project output folder so retries do not re-transcribe.
+   - Use `scripts/generate-ass-subtitles.js` only when speech-aligned ASR is unavailable or the user explicitly accepts rough timing. If used, state that subtitle timing is rough and must be aligned before delivery.
 
 6. Render:
    - Use transparent overlays plus ASS subtitles.
+   - Use the speech-aligned ASS file for the main output; keep the rough ASS file clearly named as a fallback if it exists.
    - Use `scripts/render-video.ps1` for ffmpeg composition when overlays are already exported as PNG files.
    - Render a short 15-30 second sample first if the design is still being validated.
 
 7. QA before final delivery:
    - Extract still frames at every data-heavy scene.
+   - Check subtitle rhythm against the speaker at the beginning, one middle data-heavy section, and the final CTA/summary. Subtitles should appear and disappear with spoken phrases, not drift ahead or lag behind the mouth.
    - Check no production notes remain on screen.
    - Check Chinese line breaks do not split numbers, percentages, product names, or short labels.
    - Check subtitles are readable on face, shirt, and bright wall backgrounds.
@@ -67,6 +71,7 @@ Keep the output flexible: choose the best visual form for the script instead of 
 
 - `references/layout-guide.md`: detailed layout and typography rules for 港险口播数据画面.
 - `scripts/prepare-video-project.ps1`: create a reusable project folder from a video and script.
+- `scripts/generate-speech-aligned-subtitles.py`: create ASS subtitles aligned to real speech timing while preserving the supplied script text. Requires `faster-whisper`; use a local cached model path with `--model` when available.
 - `scripts/generate-ass-subtitles.js`: create rough ASS subtitles with white text and outline from a Chinese script.
 - `scripts/render-video.ps1`: composite transparent PNG overlays and subtitles onto the source video.
 - `assets/design-tokens.json`: default colors and typography tokens.
